@@ -255,7 +255,8 @@ class nsefetch:
             self.fetch_nbf_index_future_json()
             self.fetch_nse_options_graphs_json()
             self.fetch_nse_all_options_graphs_json()
-            # break
+        else:
+            break
             # sleep(random.uniform(35.5, 45.5))
 
     def custom_command_if_i_need_anything_to_do_cutom(self):
