@@ -1,0 +1,15 @@
+{
+    "identifier": "OPTIDXNIFTY28-10-2021CE17900.00",
+    "name": "NIFTY",
+    "grapthData": [
+        [
+            1629191776000,
+            0
+        ],
+        [
+            1629194827000,
+            0
+        ]
+    ],
+    "closePrice": 288.15
+}
