@@ -1,4 +1,4 @@
-import requests, json, os
+import requests, json, os, sys
 import pandas as pd
 from numpy import random
 from time import sleep
@@ -256,7 +256,7 @@ class nsefetch:
             self.fetch_nse_options_graphs_json()
             self.fetch_nse_all_options_graphs_json()
         else:
-            break
+            sys.exit()
             # sleep(random.uniform(35.5, 45.5))
 
     def custom_command_if_i_need_anything_to_do_cutom(self):
