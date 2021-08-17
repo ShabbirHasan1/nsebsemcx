@@ -7,9 +7,9 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   schedule:
     - cron: '*/5 3-11 * * *' # Runs At every 5th minute.
-#   push:
-#     branches:
-#       - main
+  push:
+    branches:
+      - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
