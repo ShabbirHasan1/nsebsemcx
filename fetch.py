@@ -46,6 +46,7 @@ class nsefetch:
 
     __today_folder_name = dt.today().date().strftime("%d_%b_%Y")
     __today_folder_path = f'./{dt.today().date().strftime("%d_%b_%Y")}/'
+    __graphs_folder_path = f'./{dt.today().date().strftime("%d_%b_%Y")}/NIFTY/GraphsData/'
 
     def __init__(self, proxy=None):
         self.__s = requests.Session()
@@ -54,7 +55,7 @@ class nsefetch:
         self.__check_or_create_expiry_directories()
         self.__fetch_nse()
 
-    def __check_or_create_expiry_directories(self):
+    def __check_or_create_expiry_directories(self, GraphsData=False):
         ticker_list = ('NIFTY', 'BANKNIFTY', 'FINNIFTY', 'MISC')
         if not (os.path.exists(self.__today_folder_path) and os.path.isdir(self.__today_folder_path)):
             os.system(f'mkdir -p ./{self.__today_folder_name}')
@@ -63,6 +64,10 @@ class nsefetch:
                 os.system(f'mkdir -p ./{self.__today_folder_name}/{ticker}/Options_Intraday_Snapshots')
                 os.system(f'mkdir -p ./{self.__today_folder_name}/{ticker}/Futures_Intraday_Snapshots')
             print("NBN_Expiries Directory And Subdirectories Has Been Created Successfully")
+        elif GraphsData and (not (os.path.exists(self.__graphs_folder_path) and os.path.isdir(self.__graphs_folder_path))):
+            for ticker in ticker_list:
+                os.system(f'mkdir -p ./{self.__today_folder_name}/{ticker}/GraphsData')
+            print("NBN_Expiries GraphsData Directory And Subdirectories Has Been Created Successfully")
         else:
             print("NBN_Expiries Directory Exists")
 
@@ -252,6 +257,7 @@ class nsefetch:
             self.fetch_nse_options_json()
             self.fetch_nse_futures_json()
         elif (dt.combine(dt.now(), dtt.time(10, 15, 30)) < dt.now() < dt.combine(dt.now(), dtt.time(18, 29, 59))):
+            self.__check_or_create_expiry_directories(GraphsData=True)
             self.fetch_nbf_index_future_json()
             self.fetch_nse_options_graphs_json()
             self.fetch_nse_all_options_graphs_json()
